@@ -1,0 +1,16 @@
+# Publication de seloa.fr par GitLab Pages.
+# À chaque envoi sur la branche principale, GitLab copie les fichiers du site
+# dans le dossier « public » et les met en ligne. Les autres branches
+# (par exemple « nouveau-design ») ne sont jamais publiées.
+pages:
+  stage: deploy
+  image: busybox:1.36
+  script:
+    - mkdir public
+    - cp index.html favicon.svg robots.txt sitemap.xml public/
+    - cp -r logos captures public/
+  artifacts:
+    paths:
+      - public
+  rules:
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
